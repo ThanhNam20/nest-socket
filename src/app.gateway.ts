@@ -40,13 +40,13 @@ export class AppGateway implements OnGatewayInit, OnGatewayConnection, OnGateway
     this.logger.log(`Client connected: ${client.id}`);
     const listquestions = this.questionService.getAllQuestion();
     let index = 0;
+    this.handleEvents(listquestions[index]);
     let interval = setInterval(() => {
-      this.handleEvents(listquestions[index]);
       index++;
-      if (index == listquestions.length) {
+      this.handleEvents(listquestions[index]);
+      if (index == listquestions.length - 1) {
         clearInterval(interval);
       }
     }, 10000);
-
   }
 }
